@@ -6,7 +6,7 @@ import Header from './Header'
 import Home from './Home'
 import About from './About'
 import Products from './Products'
-import Product from './SingleProduct'
+import Product from './ProductView'
 
 class App extends Component{
     constructor(props){

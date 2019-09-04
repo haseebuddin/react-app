@@ -1,99 +1,118 @@
-import React, { Component } from 'react'
-import { Row,Col,Container } from 'react-bootstrap'
+import React, {Component} from 'react'
+import {Row, Col, Container} from 'react-bootstrap'
 import {NavLink} from "react-router-dom";
+import {connect} from 'react-redux'
+import {updateProducts} from "./actions";
 import axios from 'axios';
+
 // import image from 'giphy.gif';
 
 class Content extends Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                count: 0,
-                products: [],
-                loading:true
-            }
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0,
+            // products: [],
+            loading: true
         }
-    componentDidMount(){
+    }
+
+    componentDidMount() {
 
     }
-        componentWillMount() {
-            axios.interceptors.request.use((config) => {
-                // Do something before request is sent
-                // console.log(config);
-                // alert("tst");
 
-                return config;
+    componentWillMount() {
 
-            }, (error) => {
-                // Do something with request error
-                return Promise.reject(error);
-            });
-            axios.get(`/products`)
-            .then((response) =>{
-                    // return response
+
+        axios.interceptors.request.use((config) => {
+            // Do something before request is sent
+            // console.log(config);
+            // alert("tst");
+
+            return config;
+
+        }, (error) => {
+            // Do something with request error
+            return Promise.reject(error);
+        });
+        axios.get(`/products`)
+            .then((response) => {
+                // return response
                 console.log(response);
                 return response.data;
-                }).then((products) =>{
+            }).then((products) => {
 
-                    // console.log(data);
-                    const newProducts = products.map(({_id, name, description, price,image}) =>{
-                        return {_id, name, description, price,image}
-                });
+            // console.log(data);
+            const newProducts = products.map(({_id, name, description, price, image}) => {
+                return {_id, name, description, price, image}
+            });
             // axios.get(`/products/images/566c3191074e330300605485`).
             // then((responseva) =>{
             //    console.log("image response",responseva.data);
             // });
-            this.setState({
+            console.log("dispatch product",this.props.dispatch(updateProducts(newProducts)));
+            /*this.setState({
                     products: newProducts,
                     loading:false
-                })
-            })
-        }
-        increment() {
-            this.setState({
-                count: this.state.count +1
-            })
-        }
+                })*/
+        })
+    }
+
+    increment() {
+        this.setState({
+            count: this.state.count + 1
+        })
+    }
 
     renderRow() {
-        return this.state.products.map((product, i) =>{
-            return(
+        console.log("render row", this.props);
+        return this.props.products.map((product, i) => {
+            return (
                 <Col key={product._id} md={4} className="mb-3 mt-3">
                     <NavLink to={`/product/${product._id}`}>
-                        <div className="card" >
-                            <img className="card-img-top" title={product._id} src={`https://greencommunitylaundry.herokuapp.com/api/images/${product.image}`} alt={product.name} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{product.name}</h5>
-                                    {/*<p className="card-text">{product.description}</p>*/}
-                                    <p className="card-text">Price: ${product.price}</p>
-                                    {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
-                                </div>
+                        <div className="card">
+                            <img className="card-img-top" title={product._id}
+                                 src={`https://greencommunitylaundry.herokuapp.com/api/images/${product.image}`}
+                                 alt={product.name}/>
+                            <div className="card-body">
+                                <h5 className="card-title">{product.name}</h5>
+                                {/*<p className="card-text">{product.description}</p>*/}
+                                <p className="card-text">Price: ${product.price}</p>
+                                {/*<a href="#" className="btn btn-primary">Go somewhere</a>*/}
+                            </div>
                         </div>
                     </NavLink>
                 </Col>
-            /*{<tr key={product. id}>
-                <td>{i}</td>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-            </tr>}*/
+                /*{<tr key={product. id}>
+                    <td>{i}</td>
+                    <td>{product.name}</td>
+                    <td>{product.description}</td>
+                    <td>{product.price}</td>
+                </tr>}*/
             )
         })
     }
-        render() {
-                return (
-                    <Container>
-                        <Row>
-                            {this.renderRow()}
-                        </Row>
-                    </Container>
-                )
 
-        }
+    render() {
+        console.log("Component Products", this.props.products);
+        return (
+            <Container>
+                <Row>
+                    {this.renderRow()}
+                </Row>
+            </Container>
+        )
 
     }
-export default Content
 
+}
+
+// export default Content
+
+export default connect((state) => function (state) {
+    console.log("state", state);
+    return {products: state.products.products}
+})(Content);
 
 /*{                <Table style={{marginTop:'30px'}} striped bordered hover>
                     <thead>

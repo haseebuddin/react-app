@@ -3,9 +3,11 @@ const initialState = {
 }
 
 export default function productsReducer(state = initialState, action) {
+    // console.log("action type",action.products);
     switch (action.type) {
         case "UPDATE_PRODUCTS" :
-            return Object.assign({}, state, action.products);
+            // console.log("action products:",action.products);
+            return Object.assign({}, state, {products:action.products});
         default : return state;
 
     }

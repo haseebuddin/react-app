@@ -1,3 +1,4 @@
 export function updateProducts(products) {
-    return {type: "UPDATE_PRODUCTS", products}
+    console.log("products action: ",products);
+    return {type: "UPDATE_PRODUCTS", products};
 }

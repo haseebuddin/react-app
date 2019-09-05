@@ -10,16 +10,16 @@ import axios from 'axios';
 class Content extends Component {
     constructor(props) {
         super(props);
+
+        // console.log()
         this.state = {
-            count: 0,
+            count: 0
             // products: [],
-            loading: true
+            // loading: true
         }
     }
 
-    componentDidMount() {
 
-    }
 
     componentWillMount() {
 
@@ -38,7 +38,7 @@ class Content extends Component {
         axios.get(`/products`)
             .then((response) => {
                 // return response
-                console.log(response);
+                // console.log(response);
                 return response.data;
             }).then((products) => {
 
@@ -50,12 +50,17 @@ class Content extends Component {
             // then((responseva) =>{
             //    console.log("image response",responseva.data);
             // });
+            // console.log("props product",this.props.products);
             console.log("dispatch product",this.props.dispatch(updateProducts(newProducts)));
             /*this.setState({
                     products: newProducts,
                     loading:false
                 })*/
         })
+    }
+
+    componentDidMount() {
+        // console.log("component did mount:",this.props);
     }
 
     increment() {
@@ -65,7 +70,7 @@ class Content extends Component {
     }
 
     renderRow() {
-        console.log("render row", this.props);
+        console.log("render row", this.props.products);
         return this.props.products.map((product, i) => {
             return (
                 <Col key={product._id} md={4} className="mb-3 mt-3">

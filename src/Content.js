@@ -51,7 +51,7 @@ class Content extends Component {
             //    console.log("image response",responseva.data);
             // });
             // console.log("props product",this.props.products);
-            console.log("dispatch product",this.props.dispatch(updateProducts(newProducts)));
+            this.props.dispatch(updateProducts(products));
             /*this.setState({
                     products: newProducts,
                     loading:false
@@ -114,9 +114,13 @@ class Content extends Component {
 
 // export default Content
 
-export default connect((state) => function (state) {
+/*export default connect((state) => function (state) {
     console.log("state", state);
-    return {products: state.products.products}
+    return {items: state.products.products}
+})(Content);*/
+export default connect((items) =>function (state){
+    console.log("state products:", state);
+    return {items: state.products.products}
 })(Content);
 
 /*{                <Table style={{marginTop:'30px'}} striped bordered hover>

@@ -9,6 +9,8 @@ import Home from './Home'
 import About from './About'
 import Products from './Products'
 import Product from './ProductView'
+import Login from './Login'
+import Register from './Register'
 
 
 class App extends Component {
@@ -27,6 +29,8 @@ class App extends Component {
                         <Route exact path='/' component={Home}/>
                         <Route path='/about' component={About}/>
                         <Route path='/products' component={Products}/>
+                        <Route path='/login' component={Login}/>
+                        <Route path='/signup' component={Register}/>
 
                         <Route path='/product/:id' component={Product}/>
                     </Router>

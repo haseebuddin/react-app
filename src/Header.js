@@ -22,6 +22,12 @@ export default class Header extends Component{
                             <NavLink activeStyle={{
                                 textDecoration:'Underline'
                             }} activeClassName='active' to='/products' className='nav-link' >Products</NavLink>
+                            <NavLink activeStyle={{
+                                textDecoration:'Underline'
+                            }} activeClassName='active' to='/login' className='nav-link' >Login</NavLink>
+                            <NavLink activeStyle={{
+                                textDecoration:'Underline'
+                            }} activeClassName='active' to='/signup' className='nav-link' >Signup</NavLink>
                         </Nav>
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

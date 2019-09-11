@@ -1,5 +1,6 @@
 const initialState = {
-    products: []
+    items:[],
+    loading:true
 }
 
 export default function productsReducer(state = initialState, action) {
@@ -7,7 +8,7 @@ export default function productsReducer(state = initialState, action) {
     switch (action.type) {
         case "UPDATE_PRODUCTS" :
             // console.log("action products:",action.products);
-            return Object.assign({}, state, {products:action.products});
+            return Object.assign({}, state, {products:action.products,});
         default : return state;
 
     }

@@ -118,9 +118,9 @@ class Content extends Component {
     console.log("state", state);
     return {items: state.products.products}
 })(Content);*/
-export default connect((items) =>function (state){
+export default connect((products) =>function (state){
     console.log("state products:", state);
-    return {items: state.products.products}
+    return {products: state.products.products}
 })(Content);
 
 /*{                <Table style={{marginTop:'30px'}} striped bordered hover>

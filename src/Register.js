@@ -37,13 +37,35 @@ class Register extends Component {
     }
     submituserRegistrationForm(e) {
         e.preventDefault();
-        const data = {
-            "user_name": this.state.name,
-            "user_email": this.state.email,
-            "user_role": this.state.role,
+        const data1 = {
+            "name": this.state.name,
+            "email": this.state.email,
+            "role": this.state.role,
             "password": this.state.password
         };
-        console.log(data);
+        /*const headers = {
+            'Content-Type': 'application/json',
+        }*/
+        /*console.log(data);
+        console.log(data);*/
+        axios({
+            method: 'post',
+            url: '/users',
+            data: data1,
+            config: {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded',"Access-Control-Allow-Origin": "*" }}
+        }).then(
+            function (response) {
+            console.log("api response: " ,response);
+            if (response.data.success) {
+                /*window.location.href = "/";
+                console.log("Login successfull");*/
+            } else {
+                alert(response.data.message);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
         /*        if (this.validateForm()) {
                     console.log(this.state);
                     // var apiBaseUrl = "http://localhost:1288/api/";
